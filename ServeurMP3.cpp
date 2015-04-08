@@ -10,8 +10,8 @@
 ServeurMP3::ServeurMP3()
 {
 	nbMP3 = 0;
-	DIR* rep = NULL;
-	struct dirent* fichierLu = NULL;
+	DIR* rep = nullptr;
+	struct dirent* fichierLu = nullptr;
 	string titreMP3 = "";
 	rep = opendir("./mp3");
 	if(rep != NULL)
@@ -102,7 +102,7 @@ string ServeurMP3::jouerMP3(string nom)
 	    	stringUrl = "mp3/" + nom + ".mp3";
 		url = stringUrl.c_str(); 
 
-	 	libvlc_vlm_add_broadcast(vlc, token.c_str(), url, sout, 0, NULL, true, false);
+	 	libvlc_vlm_add_broadcast(vlc, token.c_str(), url, sout, 0, nullptr, true, false);
 		
 		//Information console
 		cout << "token = " << token << endl;
