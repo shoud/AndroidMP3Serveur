@@ -29,6 +29,7 @@ ServeurMP3::ServeurMP3()
 	{
 		cout << "pas de repertoire" << endl;
 	}
+	vlc = libvlc_new(0, NULL);
 }
 /**
 * Permet de rajouter un fichier MP3.
@@ -85,7 +86,6 @@ Serveur::listMP3 ServeurMP3::listerMP3()
 */
 string ServeurMP3::jouerMP3(string nom)
 {
-	vlc = libvlc_new(0, NULL);
 	if(vlc == NULL)
 		return "";
 	auto duration = chrono::system_clock::now().time_since_epoch();
