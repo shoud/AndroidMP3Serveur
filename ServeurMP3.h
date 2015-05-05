@@ -29,6 +29,7 @@ class ServeurMP3
 	string jouerMP3(string nom);
 	void play();
 	void stop();
+	void envoyerMusique(string nom, Serveur::MusiqueByte musique);
 	string getToken();
 };
 

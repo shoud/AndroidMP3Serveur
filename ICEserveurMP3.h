@@ -81,6 +81,8 @@ namespace Serveur
 
 typedef ::std::vector< ::std::string> listMP3;
 
+typedef ::std::vector< ::Ice::Byte> MusiqueByte;
+
 }
 
 namespace Serveur
@@ -106,6 +108,9 @@ typedef ::IceUtil::Handle< Callback_mp3_play_Base> Callback_mp3_playPtr;
 
 class Callback_mp3_stop_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_mp3_stop_Base> Callback_mp3_stopPtr;
+
+class Callback_mp3_envoyerMusique_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_mp3_envoyerMusique_Base> Callback_mp3_envoyerMusiquePtr;
 
 class Callback_mp3_listerMP3_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_mp3_listerMP3_Base> Callback_mp3_listerMP3Ptr;
@@ -784,6 +789,76 @@ private:
     
 public:
 
+    void envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique)
+    {
+        envoyerMusique(nom, musique, 0);
+    }
+    void envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context& __ctx)
+    {
+        envoyerMusique(nom, musique, &__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return begin_envoyerMusique(nom, musique, 0, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent));
+    }
+    ::Ice::AsyncResultPtr
+    begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_envoyerMusique(nom, musique, 0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return begin_envoyerMusique(nom, musique, &__ctx, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_envoyerMusique(nom, musique, &__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+#endif
+
+    ::Ice::AsyncResultPtr begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique)
+    {
+        return begin_envoyerMusique(nom, musique, 0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context& __ctx)
+    {
+        return begin_envoyerMusique(nom, musique, &__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_envoyerMusique(nom, musique, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_envoyerMusique(nom, musique, &__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Serveur::Callback_mp3_envoyerMusiquePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_envoyerMusique(nom, musique, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context& __ctx, const ::Serveur::Callback_mp3_envoyerMusiquePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_envoyerMusique(nom, musique, &__ctx, __del, __cookie);
+    }
+
+    void end_envoyerMusique(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    void envoyerMusique(const ::std::string&, const ::Serveur::MusiqueByte&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_envoyerMusique(const ::std::string&, const ::Serveur::MusiqueByte&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
+public:
+
     ::Serveur::listMP3 listerMP3()
     {
         return listerMP3(0);
@@ -1034,6 +1109,8 @@ public:
 
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 
+    virtual void envoyerMusique(const ::std::string&, const ::Serveur::MusiqueByte&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+
     virtual ::Serveur::listMP3 listerMP3(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 };
 
@@ -1066,6 +1143,8 @@ public:
 
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
+    virtual void envoyerMusique(const ::std::string&, const ::Serveur::MusiqueByte&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
     virtual ::Serveur::listMP3 listerMP3(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 };
 
@@ -1097,6 +1176,8 @@ public:
     virtual void play(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual void envoyerMusique(const ::std::string&, const ::Serveur::MusiqueByte&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual ::Serveur::listMP3 listerMP3(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 };
@@ -1140,6 +1221,9 @@ public:
 
     virtual void stop(const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___stop(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual void envoyerMusique(const ::std::string&, const ::Serveur::MusiqueByte&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___envoyerMusique(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::Serveur::listMP3 listerMP3(const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___listerMP3(::IceInternal::Incoming&, const ::Ice::Current&);
@@ -1814,6 +1898,88 @@ template<class T, typename CT> Callback_mp3_stopPtr
 newCallback_mp3_stop(T* instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_mp3_stop<T, CT>(instance, 0, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_mp3_envoyerMusique : public Callback_mp3_envoyerMusique_Base, public ::IceInternal::OnewayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)();
+
+    CallbackNC_mp3_envoyerMusique(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallbackNC<T>(obj, cb, excb, sentcb)
+    {
+    }
+};
+
+template<class T> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(const IceUtil::Handle<T>& instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_envoyerMusique<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_envoyerMusique<T>(instance, 0, excb, sentcb);
+}
+
+template<class T> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(T* instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_envoyerMusique<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(T* instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_envoyerMusique<T>(instance, 0, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_mp3_envoyerMusique : public Callback_mp3_envoyerMusique_Base, public ::IceInternal::OnewayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const CT&);
+
+    Callback_mp3_envoyerMusique(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallback<T, CT>(obj, cb, excb, sentcb)
+    {
+    }
+};
+
+template<class T, typename CT> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(const IceUtil::Handle<T>& instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_envoyerMusique<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_envoyerMusique<T, CT>(instance, 0, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(T* instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_envoyerMusique<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_mp3_envoyerMusiquePtr
+newCallback_mp3_envoyerMusique(T* instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_envoyerMusique<T, CT>(instance, 0, excb, sentcb);
 }
 
 template<class T>

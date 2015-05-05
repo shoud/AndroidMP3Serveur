@@ -141,3 +141,12 @@ string ServeurMP3::getToken()
 {
 	return token;
 }
+void ServeurMP3::envoyerMusique(string nom, Serveur::MusiqueByte musique)
+{
+	FILE* file;
+	std::string path = "mp3/" + nom + ".mp3";
+	file = fopen(path.c_str(), "a+");
+	fseek(file, 0, SEEK_END);
+	fwrite(&musique[0], 1, musique.size(), file);
+	fclose(file);
+}

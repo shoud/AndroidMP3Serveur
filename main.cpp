@@ -26,9 +26,13 @@ public:
     virtual void play(const Ice::Current&);
     virtual void stop(const Ice::Current&);
     virtual Serveur::listMP3 listerMP3(const Ice::Current&);
-
+    virtual void envoyerMusique(const std::string& nom, const Serveur::MusiqueByte& musique, const Ice::Current&);
 };
 
+void ServeurMP3I::envoyerMusique(const std::string& nom, const Serveur::MusiqueByte& musique, const Ice::Current&)
+{
+    sm.envoyerMusique(nom,musique);
+}
 void ServeurMP3I::ajouterMP3(const string& nom,const string& url ,const Ice::Current&)
 {
     return sm.ajouterMP3(nom, url);
