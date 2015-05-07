@@ -143,10 +143,12 @@ string ServeurMP3::getToken()
 }
 void ServeurMP3::envoyerMusique(string nom, Serveur::MusiqueByte musique)
 {
+	cout << "Initialisation de l'envois de la musique" << endl;
 	FILE* file;
 	std::string path = "mp3/" + nom + ".mp3";
 	file = fopen(path.c_str(), "a+");
 	fseek(file, 0, SEEK_END);
 	fwrite(&musique[0], 1, musique.size(), file);
+	cout << "Musique enregistré dans : " << path << endl;
 	fclose(file);
 }
