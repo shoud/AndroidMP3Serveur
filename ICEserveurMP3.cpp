@@ -40,8 +40,6 @@
 namespace
 {
 
-const ::std::string __Serveur__mp3__ajouterMP3_name = "ajouterMP3";
-
 const ::std::string __Serveur__mp3__supprimerMP3_name = "supprimerMP3";
 
 const ::std::string __Serveur__mp3__rechercherMP3_name = "rechercherMP3";
@@ -77,60 +75,8 @@ void
     }
 }
 
-void
-IceProxy::Serveur::mp3::ajouterMP3(const ::std::string& nom, const ::std::string& url, const ::Ice::Context* __ctx)
-{
-    ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__ajouterMP3_name, __ctx);
-    int __cnt = 0;
-    while(true)
-    {
-        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
-        try
-        {
-            __delBase = __getDelegate(false);
-            ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
-            __del->ajouterMP3(nom, url, __ctx, __observer);
-            return;
-        }
-        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
-        {
-            __handleExceptionWrapper(__delBase, __ex, __observer);
-        }
-        catch(const ::Ice::LocalException& __ex)
-        {
-            __handleException(__delBase, __ex, true, __cnt, __observer);
-        }
-    }
-}
-
-::Ice::AsyncResultPtr
-IceProxy::Serveur::mp3::begin_ajouterMP3(const ::std::string& nom, const ::std::string& url, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
-{
-    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__ajouterMP3_name, __del, __cookie);
-    try
-    {
-        __result->__prepare(__Serveur__mp3__ajouterMP3_name, ::Ice::Normal, __ctx);
-        ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
-        __os->write(url);
-        __result->__endWriteParams();
-        __result->__send(true);
-    }
-    catch(const ::Ice::LocalException& __ex)
-    {
-        __result->__exceptionAsync(__ex);
-    }
-    return __result;
-}
-
-void
-IceProxy::Serveur::mp3::end_ajouterMP3(const ::Ice::AsyncResultPtr& __result)
-{
-    __end(__result, __Serveur__mp3__ajouterMP3_name);
-}
-
 bool
-IceProxy::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::Context* __ctx)
+IceProxy::Serveur::mp3::supprimerMP3(const ::std::string& titre, const ::Ice::Context* __ctx)
 {
     ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__supprimerMP3_name, __ctx);
     int __cnt = 0;
@@ -142,7 +88,7 @@ IceProxy::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::Cont
             __checkTwowayOnly(__Serveur__mp3__supprimerMP3_name);
             __delBase = __getDelegate(false);
             ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
-            return __del->supprimerMP3(nom, __ctx, __observer);
+            return __del->supprimerMP3(titre, __ctx, __observer);
         }
         catch(const ::IceInternal::LocalExceptionWrapper& __ex)
         {
@@ -156,7 +102,7 @@ IceProxy::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::Cont
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Serveur::mp3::begin_supprimerMP3(const ::std::string& nom, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::Serveur::mp3::begin_supprimerMP3(const ::std::string& titre, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     __checkAsyncTwowayOnly(__Serveur__mp3__supprimerMP3_name);
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__supprimerMP3_name, __del, __cookie);
@@ -164,7 +110,7 @@ IceProxy::Serveur::mp3::begin_supprimerMP3(const ::std::string& nom, const ::Ice
     {
         __result->__prepare(__Serveur__mp3__supprimerMP3_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
         __result->__endWriteParams();
         __result->__send(true);
     }
@@ -207,7 +153,7 @@ IceProxy::Serveur::mp3::end_supprimerMP3(const ::Ice::AsyncResultPtr& __result)
 }
 
 bool
-IceProxy::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice::Context* __ctx)
+IceProxy::Serveur::mp3::rechercherMP3(const ::std::string& titre, const ::Ice::Context* __ctx)
 {
     ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__rechercherMP3_name, __ctx);
     int __cnt = 0;
@@ -219,7 +165,7 @@ IceProxy::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice::Con
             __checkTwowayOnly(__Serveur__mp3__rechercherMP3_name);
             __delBase = __getDelegate(false);
             ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
-            return __del->rechercherMP3(nom, __ctx, __observer);
+            return __del->rechercherMP3(titre, __ctx, __observer);
         }
         catch(const ::IceInternal::LocalExceptionWrapper& __ex)
         {
@@ -233,7 +179,7 @@ IceProxy::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice::Con
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Serveur::mp3::begin_rechercherMP3(const ::std::string& nom, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::Serveur::mp3::begin_rechercherMP3(const ::std::string& titre, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     __checkAsyncTwowayOnly(__Serveur__mp3__rechercherMP3_name);
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__rechercherMP3_name, __del, __cookie);
@@ -241,7 +187,7 @@ IceProxy::Serveur::mp3::begin_rechercherMP3(const ::std::string& nom, const ::Ic
     {
         __result->__prepare(__Serveur__mp3__rechercherMP3_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
         __result->__endWriteParams();
         __result->__send(true);
     }
@@ -284,7 +230,7 @@ IceProxy::Serveur::mp3::end_rechercherMP3(const ::Ice::AsyncResultPtr& __result)
 }
 
 ::std::string
-IceProxy::Serveur::mp3::jouerMP3(const ::std::string& nom, const ::Ice::Context* __ctx)
+IceProxy::Serveur::mp3::jouerMP3(const ::std::string& titre, const ::Ice::Context* __ctx)
 {
     ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__jouerMP3_name, __ctx);
     int __cnt = 0;
@@ -296,7 +242,7 @@ IceProxy::Serveur::mp3::jouerMP3(const ::std::string& nom, const ::Ice::Context*
             __checkTwowayOnly(__Serveur__mp3__jouerMP3_name);
             __delBase = __getDelegate(false);
             ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
-            return __del->jouerMP3(nom, __ctx, __observer);
+            return __del->jouerMP3(titre, __ctx, __observer);
         }
         catch(const ::IceInternal::LocalExceptionWrapper& __ex)
         {
@@ -310,7 +256,7 @@ IceProxy::Serveur::mp3::jouerMP3(const ::std::string& nom, const ::Ice::Context*
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Serveur::mp3::begin_jouerMP3(const ::std::string& nom, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::Serveur::mp3::begin_jouerMP3(const ::std::string& titre, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     __checkAsyncTwowayOnly(__Serveur__mp3__jouerMP3_name);
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__jouerMP3_name, __del, __cookie);
@@ -318,7 +264,7 @@ IceProxy::Serveur::mp3::begin_jouerMP3(const ::std::string& nom, const ::Ice::Co
     {
         __result->__prepare(__Serveur__mp3__jouerMP3_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
         __result->__endWriteParams();
         __result->__send(true);
     }
@@ -534,7 +480,7 @@ IceProxy::Serveur::mp3::end_stop(const ::Ice::AsyncResultPtr& __result)
 }
 
 void
-IceProxy::Serveur::mp3::envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __ctx)
+IceProxy::Serveur::mp3::envoyerMusique(const ::std::string& titre, const ::std::string& artiste, const ::std::string& album, const ::std::string& compo, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __ctx)
 {
     ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__envoyerMusique_name, __ctx);
     int __cnt = 0;
@@ -545,7 +491,7 @@ IceProxy::Serveur::mp3::envoyerMusique(const ::std::string& nom, const ::Serveur
         {
             __delBase = __getDelegate(false);
             ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
-            __del->envoyerMusique(nom, musique, __ctx, __observer);
+            __del->envoyerMusique(titre, artiste, album, compo, musique, __ctx, __observer);
             return;
         }
         catch(const ::IceInternal::LocalExceptionWrapper& __ex)
@@ -560,14 +506,17 @@ IceProxy::Serveur::mp3::envoyerMusique(const ::std::string& nom, const ::Serveur
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Serveur::mp3::begin_envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::Serveur::mp3::begin_envoyerMusique(const ::std::string& titre, const ::std::string& artiste, const ::std::string& album, const ::std::string& compo, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__envoyerMusique_name, __del, __cookie);
     try
     {
         __result->__prepare(__Serveur__mp3__envoyerMusique_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
+        __os->write(artiste);
+        __os->write(album);
+        __os->write(compo);
         __os->write(musique);
         __result->__endWriteParams();
         __result->__send(true);
@@ -684,55 +633,14 @@ IceProxy::Serveur::mp3::__newInstance() const
     return new mp3;
 }
 
-void
-IceDelegateM::Serveur::mp3::ajouterMP3(const ::std::string& nom, const ::std::string& url, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
-{
-    ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__ajouterMP3_name, ::Ice::Normal, __context, __observer);
-    try
-    {
-        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
-        __os->write(url);
-        __og.endWriteParams();
-    }
-    catch(const ::Ice::LocalException& __ex)
-    {
-        __og.abort(__ex);
-    }
-    bool __ok = __og.invoke();
-    if(__og.hasResponse())
-    {
-        try
-        {
-            if(!__ok)
-            {
-                try
-                {
-                    __og.throwUserException();
-                }
-                catch(const ::Ice::UserException& __ex)
-                {
-                    ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
-                    throw __uue;
-                }
-            }
-            __og.readEmptyParams();
-        }
-        catch(const ::Ice::LocalException& __ex)
-        {
-            throw ::IceInternal::LocalExceptionWrapper(__ex, false);
-        }
-    }
-}
-
 bool
-IceDelegateM::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+IceDelegateM::Serveur::mp3::supprimerMP3(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
 {
     ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__supprimerMP3_name, ::Ice::Normal, __context, __observer);
     try
     {
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
         __og.endWriteParams();
     }
     catch(const ::Ice::LocalException& __ex)
@@ -767,13 +675,13 @@ IceDelegateM::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::
 }
 
 bool
-IceDelegateM::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+IceDelegateM::Serveur::mp3::rechercherMP3(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
 {
     ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__rechercherMP3_name, ::Ice::Normal, __context, __observer);
     try
     {
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
         __og.endWriteParams();
     }
     catch(const ::Ice::LocalException& __ex)
@@ -808,13 +716,13 @@ IceDelegateM::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice:
 }
 
 ::std::string
-IceDelegateM::Serveur::mp3::jouerMP3(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+IceDelegateM::Serveur::mp3::jouerMP3(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
 {
     ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__jouerMP3_name, ::Ice::Normal, __context, __observer);
     try
     {
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
         __og.endWriteParams();
     }
     catch(const ::Ice::LocalException& __ex)
@@ -943,13 +851,16 @@ IceDelegateM::Serveur::mp3::stop(const ::Ice::Context* __context, ::IceInternal:
 }
 
 void
-IceDelegateM::Serveur::mp3::envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+IceDelegateM::Serveur::mp3::envoyerMusique(const ::std::string& titre, const ::std::string& artiste, const ::std::string& album, const ::std::string& compo, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
 {
     ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__envoyerMusique_name, ::Ice::Normal, __context, __observer);
     try
     {
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
-        __os->write(nom);
+        __os->write(titre);
+        __os->write(artiste);
+        __os->write(album);
+        __os->write(compo);
         __os->write(musique);
         __og.endWriteParams();
     }
@@ -1015,83 +926,17 @@ IceDelegateM::Serveur::mp3::listerMP3(const ::Ice::Context* __context, ::IceInte
     }
 }
 
-void
-IceDelegateD::Serveur::mp3::ajouterMP3(const ::std::string& nom, const ::std::string& url, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
-{
-    class _DirectI : public ::IceInternal::Direct
-    {
-    public:
-
-        _DirectI(const ::std::string& __p_nom, const ::std::string& __p_url, const ::Ice::Current& __current) : 
-            ::IceInternal::Direct(__current),
-            _m_nom(__p_nom),
-            _m_url(__p_url)
-        {
-        }
-        
-        virtual ::Ice::DispatchStatus
-        run(::Ice::Object* object)
-        {
-            ::Serveur::mp3* servant = dynamic_cast< ::Serveur::mp3*>(object);
-            if(!servant)
-            {
-                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
-            }
-            servant->ajouterMP3(_m_nom, _m_url, _current);
-            return ::Ice::DispatchOK;
-        }
-        
-    private:
-        
-        const ::std::string& _m_nom;
-        const ::std::string& _m_url;
-    };
-    
-    ::Ice::Current __current;
-    __initCurrent(__current, __Serveur__mp3__ajouterMP3_name, ::Ice::Normal, __context);
-    try
-    {
-        _DirectI __direct(nom, url, __current);
-        try
-        {
-            __direct.getServant()->__collocDispatch(__direct);
-        }
-        catch(...)
-        {
-            __direct.destroy();
-            throw;
-        }
-        __direct.destroy();
-    }
-    catch(const ::Ice::SystemException&)
-    {
-        throw;
-    }
-    catch(const ::IceInternal::LocalExceptionWrapper&)
-    {
-        throw;
-    }
-    catch(const ::std::exception& __ex)
-    {
-        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
-    }
-    catch(...)
-    {
-        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
-    }
-}
-
 bool
-IceDelegateD::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+IceDelegateD::Serveur::mp3::supprimerMP3(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
 {
     class _DirectI : public ::IceInternal::Direct
     {
     public:
 
-        _DirectI(bool& __result, const ::std::string& __p_nom, const ::Ice::Current& __current) : 
+        _DirectI(bool& __result, const ::std::string& __p_titre, const ::Ice::Current& __current) : 
             ::IceInternal::Direct(__current),
             _result(__result),
-            _m_nom(__p_nom)
+            _m_titre(__p_titre)
         {
         }
         
@@ -1103,14 +948,14 @@ IceDelegateD::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::
             {
                 throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
             }
-            _result = servant->supprimerMP3(_m_nom, _current);
+            _result = servant->supprimerMP3(_m_titre, _current);
             return ::Ice::DispatchOK;
         }
         
     private:
         
         bool& _result;
-        const ::std::string& _m_nom;
+        const ::std::string& _m_titre;
     };
     
     ::Ice::Current __current;
@@ -1118,7 +963,7 @@ IceDelegateD::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::
     bool __result;
     try
     {
-        _DirectI __direct(__result, nom, __current);
+        _DirectI __direct(__result, titre, __current);
         try
         {
             __direct.getServant()->__collocDispatch(__direct);
@@ -1150,16 +995,16 @@ IceDelegateD::Serveur::mp3::supprimerMP3(const ::std::string& nom, const ::Ice::
 }
 
 bool
-IceDelegateD::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+IceDelegateD::Serveur::mp3::rechercherMP3(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
 {
     class _DirectI : public ::IceInternal::Direct
     {
     public:
 
-        _DirectI(bool& __result, const ::std::string& __p_nom, const ::Ice::Current& __current) : 
+        _DirectI(bool& __result, const ::std::string& __p_titre, const ::Ice::Current& __current) : 
             ::IceInternal::Direct(__current),
             _result(__result),
-            _m_nom(__p_nom)
+            _m_titre(__p_titre)
         {
         }
         
@@ -1171,14 +1016,14 @@ IceDelegateD::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice:
             {
                 throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
             }
-            _result = servant->rechercherMP3(_m_nom, _current);
+            _result = servant->rechercherMP3(_m_titre, _current);
             return ::Ice::DispatchOK;
         }
         
     private:
         
         bool& _result;
-        const ::std::string& _m_nom;
+        const ::std::string& _m_titre;
     };
     
     ::Ice::Current __current;
@@ -1186,7 +1031,7 @@ IceDelegateD::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice:
     bool __result;
     try
     {
-        _DirectI __direct(__result, nom, __current);
+        _DirectI __direct(__result, titre, __current);
         try
         {
             __direct.getServant()->__collocDispatch(__direct);
@@ -1218,16 +1063,16 @@ IceDelegateD::Serveur::mp3::rechercherMP3(const ::std::string& nom, const ::Ice:
 }
 
 ::std::string
-IceDelegateD::Serveur::mp3::jouerMP3(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+IceDelegateD::Serveur::mp3::jouerMP3(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
 {
     class _DirectI : public ::IceInternal::Direct
     {
     public:
 
-        _DirectI(::std::string& __result, const ::std::string& __p_nom, const ::Ice::Current& __current) : 
+        _DirectI(::std::string& __result, const ::std::string& __p_titre, const ::Ice::Current& __current) : 
             ::IceInternal::Direct(__current),
             _result(__result),
-            _m_nom(__p_nom)
+            _m_titre(__p_titre)
         {
         }
         
@@ -1239,14 +1084,14 @@ IceDelegateD::Serveur::mp3::jouerMP3(const ::std::string& nom, const ::Ice::Cont
             {
                 throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
             }
-            _result = servant->jouerMP3(_m_nom, _current);
+            _result = servant->jouerMP3(_m_titre, _current);
             return ::Ice::DispatchOK;
         }
         
     private:
         
         ::std::string& _result;
-        const ::std::string& _m_nom;
+        const ::std::string& _m_titre;
     };
     
     ::Ice::Current __current;
@@ -1254,7 +1099,7 @@ IceDelegateD::Serveur::mp3::jouerMP3(const ::std::string& nom, const ::Ice::Cont
     ::std::string __result;
     try
     {
-        _DirectI __direct(__result, nom, __current);
+        _DirectI __direct(__result, titre, __current);
         try
         {
             __direct.getServant()->__collocDispatch(__direct);
@@ -1476,15 +1321,18 @@ IceDelegateD::Serveur::mp3::stop(const ::Ice::Context* __context, ::IceInternal:
 }
 
 void
-IceDelegateD::Serveur::mp3::envoyerMusique(const ::std::string& nom, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+IceDelegateD::Serveur::mp3::envoyerMusique(const ::std::string& titre, const ::std::string& artiste, const ::std::string& album, const ::std::string& compo, const ::Serveur::MusiqueByte& musique, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
 {
     class _DirectI : public ::IceInternal::Direct
     {
     public:
 
-        _DirectI(const ::std::string& __p_nom, const ::Serveur::MusiqueByte& __p_musique, const ::Ice::Current& __current) : 
+        _DirectI(const ::std::string& __p_titre, const ::std::string& __p_artiste, const ::std::string& __p_album, const ::std::string& __p_compo, const ::Serveur::MusiqueByte& __p_musique, const ::Ice::Current& __current) : 
             ::IceInternal::Direct(__current),
-            _m_nom(__p_nom),
+            _m_titre(__p_titre),
+            _m_artiste(__p_artiste),
+            _m_album(__p_album),
+            _m_compo(__p_compo),
             _m_musique(__p_musique)
         {
         }
@@ -1497,13 +1345,16 @@ IceDelegateD::Serveur::mp3::envoyerMusique(const ::std::string& nom, const ::Ser
             {
                 throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
             }
-            servant->envoyerMusique(_m_nom, _m_musique, _current);
+            servant->envoyerMusique(_m_titre, _m_artiste, _m_album, _m_compo, _m_musique, _current);
             return ::Ice::DispatchOK;
         }
         
     private:
         
-        const ::std::string& _m_nom;
+        const ::std::string& _m_titre;
+        const ::std::string& _m_artiste;
+        const ::std::string& _m_album;
+        const ::std::string& _m_compo;
         const ::Serveur::MusiqueByte& _m_musique;
     };
     
@@ -1511,7 +1362,7 @@ IceDelegateD::Serveur::mp3::envoyerMusique(const ::std::string& nom, const ::Ser
     __initCurrent(__current, __Serveur__mp3__envoyerMusique_name, ::Ice::Normal, __context);
     try
     {
-        _DirectI __direct(nom, musique, __current);
+        _DirectI __direct(titre, artiste, album, compo, musique, __current);
         try
         {
             __direct.getServant()->__collocDispatch(__direct);
@@ -1644,29 +1495,14 @@ Serveur::mp3::ice_staticId()
 }
 
 ::Ice::DispatchStatus
-Serveur::mp3::___ajouterMP3(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
-{
-    __checkMode(::Ice::Normal, __current.mode);
-    ::IceInternal::BasicStream* __is = __inS.startReadParams();
-    ::std::string nom;
-    ::std::string url;
-    __is->read(nom);
-    __is->read(url);
-    __inS.endReadParams();
-    ajouterMP3(nom, url, __current);
-    __inS.__writeEmptyParams();
-    return ::Ice::DispatchOK;
-}
-
-::Ice::DispatchStatus
 Serveur::mp3::___supprimerMP3(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
-    ::std::string nom;
-    __is->read(nom);
+    ::std::string titre;
+    __is->read(titre);
     __inS.endReadParams();
-    bool __ret = supprimerMP3(nom, __current);
+    bool __ret = supprimerMP3(titre, __current);
     ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
     __os->write(__ret);
     __inS.__endWriteParams(true);
@@ -1678,10 +1514,10 @@ Serveur::mp3::___rechercherMP3(::IceInternal::Incoming& __inS, const ::Ice::Curr
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
-    ::std::string nom;
-    __is->read(nom);
+    ::std::string titre;
+    __is->read(titre);
     __inS.endReadParams();
-    bool __ret = rechercherMP3(nom, __current);
+    bool __ret = rechercherMP3(titre, __current);
     ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
     __os->write(__ret);
     __inS.__endWriteParams(true);
@@ -1693,10 +1529,10 @@ Serveur::mp3::___jouerMP3(::IceInternal::Incoming& __inS, const ::Ice::Current& 
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
-    ::std::string nom;
-    __is->read(nom);
+    ::std::string titre;
+    __is->read(titre);
     __inS.endReadParams();
-    ::std::string __ret = jouerMP3(nom, __current);
+    ::std::string __ret = jouerMP3(titre, __current);
     ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
     __os->write(__ret);
     __inS.__endWriteParams(true);
@@ -1740,12 +1576,18 @@ Serveur::mp3::___envoyerMusique(::IceInternal::Incoming& __inS, const ::Ice::Cur
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
-    ::std::string nom;
+    ::std::string titre;
+    ::std::string artiste;
+    ::std::string album;
+    ::std::string compo;
     ::Serveur::MusiqueByte musique;
-    __is->read(nom);
+    __is->read(titre);
+    __is->read(artiste);
+    __is->read(album);
+    __is->read(compo);
     __is->read(musique);
     __inS.endReadParams();
-    envoyerMusique(nom, musique, __current);
+    envoyerMusique(titre, artiste, album, compo, musique, __current);
     __inS.__writeEmptyParams();
     return ::Ice::DispatchOK;
 }
@@ -1766,7 +1608,6 @@ namespace
 {
 const ::std::string __Serveur__mp3_all[] =
 {
-    "ajouterMP3",
     "envoyerMusique",
     "getToken",
     "ice_id",
@@ -1786,7 +1627,7 @@ const ::std::string __Serveur__mp3_all[] =
 ::Ice::DispatchStatus
 Serveur::mp3::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
 {
-    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__Serveur__mp3_all, __Serveur__mp3_all + 13, current.operation);
+    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__Serveur__mp3_all, __Serveur__mp3_all + 12, current.operation);
     if(r.first == r.second)
     {
         throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
@@ -1796,53 +1637,49 @@ Serveur::mp3::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& curr
     {
         case 0:
         {
-            return ___ajouterMP3(in, current);
+            return ___envoyerMusique(in, current);
         }
         case 1:
         {
-            return ___envoyerMusique(in, current);
+            return ___getToken(in, current);
         }
         case 2:
         {
-            return ___getToken(in, current);
+            return ___ice_id(in, current);
         }
         case 3:
         {
-            return ___ice_id(in, current);
+            return ___ice_ids(in, current);
         }
         case 4:
         {
-            return ___ice_ids(in, current);
+            return ___ice_isA(in, current);
         }
         case 5:
         {
-            return ___ice_isA(in, current);
+            return ___ice_ping(in, current);
         }
         case 6:
         {
-            return ___ice_ping(in, current);
+            return ___jouerMP3(in, current);
         }
         case 7:
         {
-            return ___jouerMP3(in, current);
+            return ___listerMP3(in, current);
         }
         case 8:
         {
-            return ___listerMP3(in, current);
+            return ___play(in, current);
         }
         case 9:
         {
-            return ___play(in, current);
+            return ___rechercherMP3(in, current);
         }
         case 10:
         {
-            return ___rechercherMP3(in, current);
-        }
-        case 11:
-        {
             return ___stop(in, current);
         }
-        case 12:
+        case 11:
         {
             return ___supprimerMP3(in, current);
         }

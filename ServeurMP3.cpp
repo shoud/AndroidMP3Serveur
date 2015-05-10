@@ -10,26 +10,13 @@
 ServeurMP3::ServeurMP3()
 {
 	nbMP3 = 0;
-	DIR* rep = nullptr;
-	struct dirent* fichierLu = nullptr;
-	string titreMP3 = "";
-	rep = opendir("./mp3");
-	if(rep != NULL)
-	{
-		while((fichierLu = readdir(rep)) != NULL)
-		{
-			titreMP3 = fichierLu->d_name;
-			size_t pos = titreMP3.find(".");
-			titreMP3 = titreMP3.substr(0, pos);	
-			ajouterMP3(titreMP3,"test");	
-		}
-		closedir(rep);
-	}
-	else
-	{
-		cout << "pas de repertoire" << endl;
-	}
+
+	//Permet de faire du streaming
 	vlc = libvlc_new(0, NULL);
+	//Connexion à la base de données
+	gestionBD = new GestionBD();
+	//On récupère tout les mp3 enregistré
+	listMP3 = gestionBD->selectAll();	
 }
 /**
 * Permet de rajouter un fichier MP3.
@@ -38,22 +25,26 @@ ServeurMP3::ServeurMP3()
 * @return true Le fichier a bien été rajouté.
 * @return false Le fichier n'a pas pu être rajouté.
 */
-void ServeurMP3::ajouterMP3(string nom,string url)
+void ServeurMP3::ajouterMP3(string chemin,string titre, string artiste, string album, string compo)
 {
-    if((!rechercherMP3(nom)) && (nom != ""))
-        listMP3.push_back(FichierMP3(nom, url));
+    	if((!rechercherMP3(titre)) && (titre != ""))
+	{
+	        listMP3.push_back(FichierMP3( chemin, titre, artiste, album, compo));
+		gestionBD->ajouter(chemin, titre, artiste, album, compo);
+	}
 }
 /**
 * Permet de supprimer un fichier MP3.
 * @param nom Nom du fichier à supprimer.
 */
-bool ServeurMP3::supprimerMP3(string nom)
+bool ServeurMP3::supprimerMP3(string titre)
 {
     for(itListMP3 = listMP3.begin(); itListMP3 != listMP3.end(); itListMP3++)
-            if(itListMP3->getNom() == nom)
+            if(itListMP3->getTitre() == titre)
             {
                 listMP3.erase(itListMP3);
-                return true;
+                gestionBD->supprimer(itListMP3->getChemin());
+		return true;
             }
     return false;
 }
@@ -61,10 +52,10 @@ bool ServeurMP3::supprimerMP3(string nom)
 * Permet de rechercher un fichier MP3.
 * @param nom Le nom du fichier à rechercher.
 */
-bool ServeurMP3::rechercherMP3(string nom)
+bool ServeurMP3::rechercherMP3(string titre)
 {
     for(itListMP3 = listMP3.begin(); itListMP3 != listMP3.end(); itListMP3++)
-            if(itListMP3->getNom() == nom)
+            if(itListMP3->getTitre() == titre)
                 return true;
     return false;
 }
@@ -77,20 +68,20 @@ Serveur::listMP3 ServeurMP3::listerMP3()
 	if(!listMP3.empty())
     	{
         	for(itListMP3 = listMP3.begin(); itListMP3 != listMP3.end(); itListMP3++)
-		res.push_back(itListMP3->getNom());
+		res.push_back(itListMP3->getTitre());
     	}
 	return res;
 }
 /**
 * Permet de jouer une musique en streaming
 */
-string ServeurMP3::jouerMP3(string nom)
+string ServeurMP3::jouerMP3(string titre)
 {
 	if(vlc == NULL)
 		return "";
 	auto duration = chrono::system_clock::now().time_since_epoch();
 	token = to_string(chrono::duration_cast<chrono::nanoseconds>(duration).count());
-	if(rechercherMP3(nom))
+	if(rechercherMP3(titre))
 	{
 		string stringUrl = "";
 		string stringSout = "";
@@ -99,7 +90,7 @@ string ServeurMP3::jouerMP3(string nom)
                                "samplerate=44100}:http{dst=:8090/" + token + ".mp3}";
 
 		const char *sout = stringSout.c_str();
-	    	stringUrl = "mp3/" + nom + ".mp3";
+	    	stringUrl = "mp3/" + titre + ".mp3";
 		url = stringUrl.c_str(); 
 
 	 	libvlc_vlm_add_broadcast(vlc, token.c_str(), url, sout, 0, nullptr, true, false);
@@ -108,7 +99,7 @@ string ServeurMP3::jouerMP3(string nom)
 		cout << "token = " << token << endl;
 		cout << "url = " << url << endl;
 		cout << "sout = " << sout << endl;
-		cout << "titre = " << nom << endl;
+		cout << "titre = " << titre << endl;
 		cout << "vlc = " << vlc << endl;
 		
 		return token;
@@ -141,14 +132,15 @@ string ServeurMP3::getToken()
 {
 	return token;
 }
-void ServeurMP3::envoyerMusique(string nom, Serveur::MusiqueByte musique)
+void ServeurMP3::envoyerMusique(string titre, string artiste, string album, string compo, Serveur::MusiqueByte musique)
 {
 	cout << "Initialisation de l'envois de la musique" << endl;
 	FILE* file;
-	std::string path = "mp3/" + nom + ".mp3";
-	file = fopen(path.c_str(), "a+");
+	std::string chemin = "mp3/" + titre + ".mp3";
+	file = fopen(chemin.c_str(), "a+");
 	fseek(file, 0, SEEK_END);
 	fwrite(&musique[0], 1, musique.size(), file);
-	cout << "Musique enregistré dans : " << path << endl;
+	cout << "Musique enregistré dans : " << chemin << endl;
 	fclose(file);
+	ajouterMP3(chemin, titre, artiste, album, compo);	
 }

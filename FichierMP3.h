@@ -10,20 +10,20 @@ using namespace std;
 class FichierMP3
 {
     private :
-        string nom; //Le titre de la musique
-	string url; //Le chemin où est enregistré la musique
+        string titre; //Le titre de la musique
+	string chemin; //Le chemin où est enregistré la musique
 	string album;
 	string compo;
-	string chanteur;
+	string artiste;
 
     public:
-        FichierMP3(string nom, string url);
+        FichierMP3(string chemin, string titre, string artiste, string album, string compo);
       	void init();
-	string getNom();
-	string getUrl();
+	string getTitre();
+	string getChemin();
 	string getAlbum();
 	string getCompo();
-	string getChanteur();
+	string getArtiste();
 };    
 
 #endif // FICHIERMP3_H

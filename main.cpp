@@ -18,36 +18,31 @@ class ServeurMP3I : public Serveur::mp3 {
 private :
 	ServeurMP3 sm;
 public:
-    virtual void ajouterMP3(const string& nom,const string& url ,const Ice::Current&);
-    virtual bool supprimerMP3(const string& nom, const Ice::Current&);
-    virtual bool rechercherMP3(const string& nom, const Ice::Current&);
-    virtual string jouerMP3(const string& nom, const Ice::Current&);
+    virtual bool supprimerMP3(const string& titre, const Ice::Current&);
+    virtual bool rechercherMP3(const string& titre, const Ice::Current&);
+    virtual string jouerMP3(const string& titre, const Ice::Current&);
     virtual string getToken(const Ice::Current&);
     virtual void play(const Ice::Current&);
     virtual void stop(const Ice::Current&);
     virtual Serveur::listMP3 listerMP3(const Ice::Current&);
-    virtual void envoyerMusique(const std::string& nom, const Serveur::MusiqueByte& musique, const Ice::Current&);
+    virtual void envoyerMusique(const std::string& titre, const std::string& artiste, const std::string& album, const std::string& compo, const Serveur::MusiqueByte& musique, const Ice::Current&);
 };
 
-void ServeurMP3I::envoyerMusique(const std::string& nom, const Serveur::MusiqueByte& musique, const Ice::Current&)
+void ServeurMP3I::envoyerMusique(const std::string& titre, const std::string& artiste, const std::string& album, const std::string& compo, const Serveur::MusiqueByte& musique, const Ice::Current&)
 {
-    sm.envoyerMusique(nom,musique);
+    sm.envoyerMusique(titre,artiste,album,compo,musique);
 }
-void ServeurMP3I::ajouterMP3(const string& nom,const string& url ,const Ice::Current&)
+bool ServeurMP3I::supprimerMP3(const string& titre, const Ice::Current&)
 {
-    return sm.ajouterMP3(nom, url);
+    return sm.supprimerMP3(titre);
 }
-bool ServeurMP3I::supprimerMP3(const string& nom, const Ice::Current&)
+bool ServeurMP3I::rechercherMP3(const string& titre, const Ice::Current&)
 {
-    return sm.supprimerMP3(nom);
+    return sm.rechercherMP3(titre);
 }
-bool ServeurMP3I::rechercherMP3(const string& nom, const Ice::Current&)
+string ServeurMP3I::jouerMP3(const string& titre, const Ice::Current&)
 {
-    return sm.rechercherMP3(nom);
-}
-string ServeurMP3I::jouerMP3(const string& nom, const Ice::Current&)
-{
-    sm.jouerMP3(nom);
+    sm.jouerMP3(titre);
 }
 string ServeurMP3I::getToken(const Ice::Current&)
 {

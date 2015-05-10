@@ -1,34 +1,27 @@
 #include "FichierMP3.h"
 
-void FichierMP3::init()
-{
-	this->nom = "inconnue";
-	this->url = "inconnue";
-	this->album = "inconnue";
-	this->compo = "inconnue";
-	this->chanteur = "inconnue";
-}
 /**
 * Constructeur de la classe FichierMP3.
 */
-FichierMP3::FichierMP3(string nom,string url)
+FichierMP3::FichierMP3(string chemin,string titre, string artiste, string album, string compo)
 {
-	//init(); 
-   	this->nom  = nom;
-	this->url = url;
-	
+   	this->titre  = titre;
+	this->chemin = chemin;
+	this->artiste = artiste;
+	this->album = album;
+	this->compo = compo;
 }
 /**
 * Permet de retourner le nom de la musique.
 * @return nom Le nom du MP3.
 */
-string FichierMP3::getNom()
+string FichierMP3::getTitre()
 {
-        return nom;
+        return titre;
 }
-string  FichierMP3::getUrl()
+string  FichierMP3::getChemin()
 {
-	return url;
+	return chemin;
 }
 string FichierMP3::getAlbum()
 {
@@ -38,7 +31,7 @@ string FichierMP3::getCompo()
 {
 	return compo;
 }
-string FichierMP3::getChanteur()
+string FichierMP3::getArtiste()
 {
-	return chanteur;
+	return artiste;
 }
