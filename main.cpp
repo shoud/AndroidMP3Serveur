@@ -22,6 +22,9 @@ public:
     virtual bool rechercherMP3(const string& titre, const Ice::Current&);
     virtual string jouerMP3(const string& titre, const Ice::Current&);
     virtual string getToken(const Ice::Current&);
+    virtual string getArtiste(const string& titre, const Ice::Current&);
+    virtual string getAlbum(const string& titre, const Ice::Current&);
+    virtual string getCompo(const string& titre, const Ice::Current&);
     virtual void play(const Ice::Current&);
     virtual void stop(const Ice::Current&);
     virtual Serveur::listMP3 listerMP3(const Ice::Current&);
@@ -43,6 +46,18 @@ bool ServeurMP3I::rechercherMP3(const string& titre, const Ice::Current&)
 string ServeurMP3I::jouerMP3(const string& titre, const Ice::Current&)
 {
     sm.jouerMP3(titre);
+}
+string ServeurMP3I::getArtiste(const string& titre, const Ice::Current&)
+{
+    return sm.getArtiste(titre);
+}
+string ServeurMP3I::getAlbum(const string& titre, const Ice::Current&)
+{
+    return sm.getAlbum(titre);
+}
+string ServeurMP3I::getCompo(const string& titre, const Ice::Current&)
+{
+    return sm.getCompo(titre);
 }
 string ServeurMP3I::getToken(const Ice::Current&)
 {

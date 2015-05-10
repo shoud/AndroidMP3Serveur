@@ -8,6 +8,9 @@ module Serveur{
 		bool rechercherMP3(string titre);
 		string jouerMP3(string titre);
 		string getToken();
+		string getArtiste(string titre);
+		string getAlbum(string nom);
+		string getCompo(string nom);
 		void play();
 		void stop();
 		void envoyerMusique(string titre, string artiste, string album, string compo, MusiqueByte musique); 

@@ -48,6 +48,12 @@ const ::std::string __Serveur__mp3__jouerMP3_name = "jouerMP3";
 
 const ::std::string __Serveur__mp3__getToken_name = "getToken";
 
+const ::std::string __Serveur__mp3__getArtiste_name = "getArtiste";
+
+const ::std::string __Serveur__mp3__getAlbum_name = "getAlbum";
+
+const ::std::string __Serveur__mp3__getCompo_name = "getCompo";
+
 const ::std::string __Serveur__mp3__play_name = "play";
 
 const ::std::string __Serveur__mp3__stop_name = "stop";
@@ -354,6 +360,237 @@ IceProxy::Serveur::mp3::begin_getToken(const ::Ice::Context* __ctx, const ::IceI
 IceProxy::Serveur::mp3::end_getToken(const ::Ice::AsyncResultPtr& __result)
 {
     ::Ice::AsyncResult::__check(__result, this, __Serveur__mp3__getToken_name);
+    ::std::string __ret;
+    bool __ok = __result->__wait();
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __result->__throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
+            }
+        }
+        ::IceInternal::BasicStream* __is = __result->__startReadParams();
+        __is->read(__ret);
+        __result->__endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& ex)
+    {
+        __result->__getObserver().failed(ex.ice_name());
+        throw;
+    }
+}
+
+::std::string
+IceProxy::Serveur::mp3::getArtiste(const ::std::string& titre, const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__getArtiste_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __checkTwowayOnly(__Serveur__mp3__getArtiste_name);
+            __delBase = __getDelegate(false);
+            ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
+            return __del->getArtiste(titre, __ctx, __observer);
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::Serveur::mp3::begin_getArtiste(const ::std::string& titre, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    __checkAsyncTwowayOnly(__Serveur__mp3__getArtiste_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__getArtiste_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__Serveur__mp3__getArtiste_name, ::Ice::Normal, __ctx);
+        ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
+        __os->write(titre);
+        __result->__endWriteParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+::std::string
+IceProxy::Serveur::mp3::end_getArtiste(const ::Ice::AsyncResultPtr& __result)
+{
+    ::Ice::AsyncResult::__check(__result, this, __Serveur__mp3__getArtiste_name);
+    ::std::string __ret;
+    bool __ok = __result->__wait();
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __result->__throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
+            }
+        }
+        ::IceInternal::BasicStream* __is = __result->__startReadParams();
+        __is->read(__ret);
+        __result->__endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& ex)
+    {
+        __result->__getObserver().failed(ex.ice_name());
+        throw;
+    }
+}
+
+::std::string
+IceProxy::Serveur::mp3::getAlbum(const ::std::string& nom, const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__getAlbum_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __checkTwowayOnly(__Serveur__mp3__getAlbum_name);
+            __delBase = __getDelegate(false);
+            ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
+            return __del->getAlbum(nom, __ctx, __observer);
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::Serveur::mp3::begin_getAlbum(const ::std::string& nom, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    __checkAsyncTwowayOnly(__Serveur__mp3__getAlbum_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__getAlbum_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__Serveur__mp3__getAlbum_name, ::Ice::Normal, __ctx);
+        ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
+        __os->write(nom);
+        __result->__endWriteParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+::std::string
+IceProxy::Serveur::mp3::end_getAlbum(const ::Ice::AsyncResultPtr& __result)
+{
+    ::Ice::AsyncResult::__check(__result, this, __Serveur__mp3__getAlbum_name);
+    ::std::string __ret;
+    bool __ok = __result->__wait();
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __result->__throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
+            }
+        }
+        ::IceInternal::BasicStream* __is = __result->__startReadParams();
+        __is->read(__ret);
+        __result->__endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& ex)
+    {
+        __result->__getObserver().failed(ex.ice_name());
+        throw;
+    }
+}
+
+::std::string
+IceProxy::Serveur::mp3::getCompo(const ::std::string& nom, const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __Serveur__mp3__getCompo_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __checkTwowayOnly(__Serveur__mp3__getCompo_name);
+            __delBase = __getDelegate(false);
+            ::IceDelegate::Serveur::mp3* __del = dynamic_cast< ::IceDelegate::Serveur::mp3*>(__delBase.get());
+            return __del->getCompo(nom, __ctx, __observer);
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::Serveur::mp3::begin_getCompo(const ::std::string& nom, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    __checkAsyncTwowayOnly(__Serveur__mp3__getCompo_name);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__mp3__getCompo_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__Serveur__mp3__getCompo_name, ::Ice::Normal, __ctx);
+        ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
+        __os->write(nom);
+        __result->__endWriteParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+::std::string
+IceProxy::Serveur::mp3::end_getCompo(const ::Ice::AsyncResultPtr& __result)
+{
+    ::Ice::AsyncResult::__check(__result, this, __Serveur__mp3__getCompo_name);
     ::std::string __ret;
     bool __ok = __result->__wait();
     try
@@ -761,6 +998,129 @@ IceDelegateM::Serveur::mp3::getToken(const ::Ice::Context* __context, ::IceInter
 {
     ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__getToken_name, ::Ice::Normal, __context, __observer);
     __og.writeEmptyParams();
+    bool __ok = __og.invoke();
+    ::std::string __ret;
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __og.throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                throw __uue;
+            }
+        }
+        ::IceInternal::BasicStream* __is = __og.startReadParams();
+        __is->read(__ret);
+        __og.endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+    }
+}
+
+::std::string
+IceDelegateM::Serveur::mp3::getArtiste(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__getArtiste_name, ::Ice::Normal, __context, __observer);
+    try
+    {
+        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
+        __os->write(titre);
+        __og.endWriteParams();
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __og.abort(__ex);
+    }
+    bool __ok = __og.invoke();
+    ::std::string __ret;
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __og.throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                throw __uue;
+            }
+        }
+        ::IceInternal::BasicStream* __is = __og.startReadParams();
+        __is->read(__ret);
+        __og.endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+    }
+}
+
+::std::string
+IceDelegateM::Serveur::mp3::getAlbum(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__getAlbum_name, ::Ice::Normal, __context, __observer);
+    try
+    {
+        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
+        __os->write(nom);
+        __og.endWriteParams();
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __og.abort(__ex);
+    }
+    bool __ok = __og.invoke();
+    ::std::string __ret;
+    try
+    {
+        if(!__ok)
+        {
+            try
+            {
+                __og.throwUserException();
+            }
+            catch(const ::Ice::UserException& __ex)
+            {
+                ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                throw __uue;
+            }
+        }
+        ::IceInternal::BasicStream* __is = __og.startReadParams();
+        __is->read(__ret);
+        __og.endReadParams();
+        return __ret;
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+    }
+}
+
+::std::string
+IceDelegateM::Serveur::mp3::getCompo(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __Serveur__mp3__getCompo_name, ::Ice::Normal, __context, __observer);
+    try
+    {
+        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
+        __os->write(nom);
+        __og.endWriteParams();
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __og.abort(__ex);
+    }
     bool __ok = __og.invoke();
     ::std::string __ret;
     try
@@ -1196,6 +1556,210 @@ IceDelegateD::Serveur::mp3::getToken(const ::Ice::Context* __context, ::IceInter
     return __result;
 }
 
+::std::string
+IceDelegateD::Serveur::mp3::getArtiste(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(::std::string& __result, const ::std::string& __p_titre, const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current),
+            _result(__result),
+            _m_titre(__p_titre)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::Serveur::mp3* servant = dynamic_cast< ::Serveur::mp3*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            _result = servant->getArtiste(_m_titre, _current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+        ::std::string& _result;
+        const ::std::string& _m_titre;
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __Serveur__mp3__getArtiste_name, ::Ice::Normal, __context);
+    ::std::string __result;
+    try
+    {
+        _DirectI __direct(__result, titre, __current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+    return __result;
+}
+
+::std::string
+IceDelegateD::Serveur::mp3::getAlbum(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(::std::string& __result, const ::std::string& __p_nom, const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current),
+            _result(__result),
+            _m_nom(__p_nom)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::Serveur::mp3* servant = dynamic_cast< ::Serveur::mp3*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            _result = servant->getAlbum(_m_nom, _current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+        ::std::string& _result;
+        const ::std::string& _m_nom;
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __Serveur__mp3__getAlbum_name, ::Ice::Normal, __context);
+    ::std::string __result;
+    try
+    {
+        _DirectI __direct(__result, nom, __current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+    return __result;
+}
+
+::std::string
+IceDelegateD::Serveur::mp3::getCompo(const ::std::string& nom, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(::std::string& __result, const ::std::string& __p_nom, const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current),
+            _result(__result),
+            _m_nom(__p_nom)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::Serveur::mp3* servant = dynamic_cast< ::Serveur::mp3*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            _result = servant->getCompo(_m_nom, _current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+        ::std::string& _result;
+        const ::std::string& _m_nom;
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __Serveur__mp3__getCompo_name, ::Ice::Normal, __context);
+    ::std::string __result;
+    try
+    {
+        _DirectI __direct(__result, nom, __current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+    return __result;
+}
+
 void
 IceDelegateD::Serveur::mp3::play(const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
 {
@@ -1552,6 +2116,51 @@ Serveur::mp3::___getToken(::IceInternal::Incoming& __inS, const ::Ice::Current& 
 }
 
 ::Ice::DispatchStatus
+Serveur::mp3::___getArtiste(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    ::IceInternal::BasicStream* __is = __inS.startReadParams();
+    ::std::string titre;
+    __is->read(titre);
+    __inS.endReadParams();
+    ::std::string __ret = getArtiste(titre, __current);
+    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
+    __os->write(__ret);
+    __inS.__endWriteParams(true);
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
+Serveur::mp3::___getAlbum(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    ::IceInternal::BasicStream* __is = __inS.startReadParams();
+    ::std::string nom;
+    __is->read(nom);
+    __inS.endReadParams();
+    ::std::string __ret = getAlbum(nom, __current);
+    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
+    __os->write(__ret);
+    __inS.__endWriteParams(true);
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
+Serveur::mp3::___getCompo(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    ::IceInternal::BasicStream* __is = __inS.startReadParams();
+    ::std::string nom;
+    __is->read(nom);
+    __inS.endReadParams();
+    ::std::string __ret = getCompo(nom, __current);
+    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
+    __os->write(__ret);
+    __inS.__endWriteParams(true);
+    return ::Ice::DispatchOK;
+}
+
+::Ice::DispatchStatus
 Serveur::mp3::___play(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
 {
     __checkMode(::Ice::Normal, __current.mode);
@@ -1609,6 +2218,9 @@ namespace
 const ::std::string __Serveur__mp3_all[] =
 {
     "envoyerMusique",
+    "getAlbum",
+    "getArtiste",
+    "getCompo",
     "getToken",
     "ice_id",
     "ice_ids",
@@ -1627,7 +2239,7 @@ const ::std::string __Serveur__mp3_all[] =
 ::Ice::DispatchStatus
 Serveur::mp3::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
 {
-    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__Serveur__mp3_all, __Serveur__mp3_all + 12, current.operation);
+    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__Serveur__mp3_all, __Serveur__mp3_all + 15, current.operation);
     if(r.first == r.second)
     {
         throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
@@ -1641,45 +2253,57 @@ Serveur::mp3::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& curr
         }
         case 1:
         {
-            return ___getToken(in, current);
+            return ___getAlbum(in, current);
         }
         case 2:
         {
-            return ___ice_id(in, current);
+            return ___getArtiste(in, current);
         }
         case 3:
         {
-            return ___ice_ids(in, current);
+            return ___getCompo(in, current);
         }
         case 4:
         {
-            return ___ice_isA(in, current);
+            return ___getToken(in, current);
         }
         case 5:
         {
-            return ___ice_ping(in, current);
+            return ___ice_id(in, current);
         }
         case 6:
         {
-            return ___jouerMP3(in, current);
+            return ___ice_ids(in, current);
         }
         case 7:
         {
-            return ___listerMP3(in, current);
+            return ___ice_isA(in, current);
         }
         case 8:
         {
-            return ___play(in, current);
+            return ___ice_ping(in, current);
         }
         case 9:
         {
-            return ___rechercherMP3(in, current);
+            return ___jouerMP3(in, current);
         }
         case 10:
         {
-            return ___stop(in, current);
+            return ___listerMP3(in, current);
         }
         case 11:
+        {
+            return ___play(in, current);
+        }
+        case 12:
+        {
+            return ___rechercherMP3(in, current);
+        }
+        case 13:
+        {
+            return ___stop(in, current);
+        }
+        case 14:
         {
             return ___supprimerMP3(in, current);
         }

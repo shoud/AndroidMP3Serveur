@@ -28,6 +28,9 @@ class ServeurMP3
         bool rechercherMP3(string nom);
         Serveur::listMP3 listerMP3();
 	string jouerMP3(string nom);
+	string getArtiste(string nom);
+	string getAlbum(string nom);
+	string getCompo(string nom);
 	void play();
 	void stop();
 	void envoyerMusique(string titre, string artiste, string album, string compo, Serveur::MusiqueByte musique);

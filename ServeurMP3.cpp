@@ -59,6 +59,27 @@ bool ServeurMP3::rechercherMP3(string titre)
                 return true;
     return false;
 }
+string ServeurMP3::getArtiste(string titre)
+{
+    for(itListMP3 = listMP3.begin(); itListMP3 != listMP3.end(); itListMP3++)
+            if(itListMP3->getTitre() == titre)
+                return itListMP3->getArtiste();
+    return "Inconnu";
+}
+string ServeurMP3::getAlbum(string titre)
+{
+    for(itListMP3 = listMP3.begin(); itListMP3 != listMP3.end(); itListMP3++)
+            if(itListMP3->getTitre() == titre)
+                return itListMP3->getAlbum();
+    return "Inconnu";
+}
+string ServeurMP3::getCompo(string titre)
+{
+    for(itListMP3 = listMP3.begin(); itListMP3 != listMP3.end(); itListMP3++)
+            if(itListMP3->getTitre() == titre)
+                return itListMP3->getCompo();
+    return "Inconnu";
+}
 /**
 * Permet d'afficher la liste de MP3.
 */

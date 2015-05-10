@@ -100,6 +100,15 @@ typedef ::IceUtil::Handle< Callback_mp3_jouerMP3_Base> Callback_mp3_jouerMP3Ptr;
 class Callback_mp3_getToken_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_mp3_getToken_Base> Callback_mp3_getTokenPtr;
 
+class Callback_mp3_getArtiste_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_mp3_getArtiste_Base> Callback_mp3_getArtistePtr;
+
+class Callback_mp3_getAlbum_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_mp3_getAlbum_Base> Callback_mp3_getAlbumPtr;
+
+class Callback_mp3_getCompo_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_mp3_getCompo_Base> Callback_mp3_getCompoPtr;
+
 class Callback_mp3_play_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_mp3_play_Base> Callback_mp3_playPtr;
 
@@ -576,6 +585,345 @@ private:
     
 public:
 
+    ::std::string getArtiste(const ::std::string& titre)
+    {
+        return getArtiste(titre, 0);
+    }
+    ::std::string getArtiste(const ::std::string& titre, const ::Ice::Context& __ctx)
+    {
+        return getArtiste(titre, &__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_getArtiste(const ::std::string& titre, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_getArtiste(titre, 0, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getArtiste(const ::std::string& titre, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_getArtiste(titre, 0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getArtiste(const ::std::string& titre, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_getArtiste(titre, &__ctx, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getArtiste(const ::std::string& titre, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_getArtiste(titre, &__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+    
+private:
+
+    ::Ice::AsyncResultPtr __begin_getArtiste(const ::std::string& titre, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+    {
+        class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
+        {
+        public:
+
+            Cpp11CB(const ::std::function<void (const ::std::string&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+                ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
+                _response(responseFunc)
+            {
+                CallbackBase::checkCallback(true, responseFunc || exceptionFunc != nullptr);
+            }
+
+            virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+            {
+                ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+                ::std::string __ret;
+                try
+                {
+                    __ret = __proxy->end_getArtiste(__result);
+                }
+                catch(::Ice::Exception& ex)
+                {
+                    Cpp11FnCallbackNC::__exception(__result, ex);
+                    return;
+                }
+                if(_response != nullptr)
+                {
+                    _response(__ret);
+                }
+            }
+        
+        private:
+            
+            ::std::function<void (const ::std::string&)> _response;
+        };
+        return begin_getArtiste(titre, __ctx, new Cpp11CB(__response, __exception, __sent));
+    }
+    
+public:
+#endif
+
+    ::Ice::AsyncResultPtr begin_getArtiste(const ::std::string& titre)
+    {
+        return begin_getArtiste(titre, 0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getArtiste(const ::std::string& titre, const ::Ice::Context& __ctx)
+    {
+        return begin_getArtiste(titre, &__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getArtiste(const ::std::string& titre, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getArtiste(titre, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getArtiste(const ::std::string& titre, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getArtiste(titre, &__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getArtiste(const ::std::string& titre, const ::Serveur::Callback_mp3_getArtistePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getArtiste(titre, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getArtiste(const ::std::string& titre, const ::Ice::Context& __ctx, const ::Serveur::Callback_mp3_getArtistePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getArtiste(titre, &__ctx, __del, __cookie);
+    }
+
+    ::std::string end_getArtiste(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    ::std::string getArtiste(const ::std::string&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_getArtiste(const ::std::string&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
+public:
+
+    ::std::string getAlbum(const ::std::string& nom)
+    {
+        return getAlbum(nom, 0);
+    }
+    ::std::string getAlbum(const ::std::string& nom, const ::Ice::Context& __ctx)
+    {
+        return getAlbum(nom, &__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_getAlbum(const ::std::string& nom, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_getAlbum(nom, 0, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getAlbum(const ::std::string& nom, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_getAlbum(nom, 0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getAlbum(const ::std::string& nom, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_getAlbum(nom, &__ctx, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getAlbum(const ::std::string& nom, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_getAlbum(nom, &__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+    
+private:
+
+    ::Ice::AsyncResultPtr __begin_getAlbum(const ::std::string& nom, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+    {
+        class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
+        {
+        public:
+
+            Cpp11CB(const ::std::function<void (const ::std::string&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+                ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
+                _response(responseFunc)
+            {
+                CallbackBase::checkCallback(true, responseFunc || exceptionFunc != nullptr);
+            }
+
+            virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+            {
+                ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+                ::std::string __ret;
+                try
+                {
+                    __ret = __proxy->end_getAlbum(__result);
+                }
+                catch(::Ice::Exception& ex)
+                {
+                    Cpp11FnCallbackNC::__exception(__result, ex);
+                    return;
+                }
+                if(_response != nullptr)
+                {
+                    _response(__ret);
+                }
+            }
+        
+        private:
+            
+            ::std::function<void (const ::std::string&)> _response;
+        };
+        return begin_getAlbum(nom, __ctx, new Cpp11CB(__response, __exception, __sent));
+    }
+    
+public:
+#endif
+
+    ::Ice::AsyncResultPtr begin_getAlbum(const ::std::string& nom)
+    {
+        return begin_getAlbum(nom, 0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getAlbum(const ::std::string& nom, const ::Ice::Context& __ctx)
+    {
+        return begin_getAlbum(nom, &__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getAlbum(const ::std::string& nom, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getAlbum(nom, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getAlbum(const ::std::string& nom, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getAlbum(nom, &__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getAlbum(const ::std::string& nom, const ::Serveur::Callback_mp3_getAlbumPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getAlbum(nom, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getAlbum(const ::std::string& nom, const ::Ice::Context& __ctx, const ::Serveur::Callback_mp3_getAlbumPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getAlbum(nom, &__ctx, __del, __cookie);
+    }
+
+    ::std::string end_getAlbum(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    ::std::string getAlbum(const ::std::string&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_getAlbum(const ::std::string&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
+public:
+
+    ::std::string getCompo(const ::std::string& nom)
+    {
+        return getCompo(nom, 0);
+    }
+    ::std::string getCompo(const ::std::string& nom, const ::Ice::Context& __ctx)
+    {
+        return getCompo(nom, &__ctx);
+    }
+#ifdef ICE_CPP11
+    ::Ice::AsyncResultPtr
+    begin_getCompo(const ::std::string& nom, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_getCompo(nom, 0, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getCompo(const ::std::string& nom, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_getCompo(nom, 0, ::Ice::newCallback(__completed, __sent), 0);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getCompo(const ::std::string& nom, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    {
+        return __begin_getCompo(nom, &__ctx, __response, __exception, __sent);
+    }
+    ::Ice::AsyncResultPtr
+    begin_getCompo(const ::std::string& nom, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    {
+        return begin_getCompo(nom, &__ctx, ::Ice::newCallback(__completed, __sent));
+    }
+    
+private:
+
+    ::Ice::AsyncResultPtr __begin_getCompo(const ::std::string& nom, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::std::string&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+    {
+        class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
+        {
+        public:
+
+            Cpp11CB(const ::std::function<void (const ::std::string&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
+                ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
+                _response(responseFunc)
+            {
+                CallbackBase::checkCallback(true, responseFunc || exceptionFunc != nullptr);
+            }
+
+            virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+            {
+                ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+                ::std::string __ret;
+                try
+                {
+                    __ret = __proxy->end_getCompo(__result);
+                }
+                catch(::Ice::Exception& ex)
+                {
+                    Cpp11FnCallbackNC::__exception(__result, ex);
+                    return;
+                }
+                if(_response != nullptr)
+                {
+                    _response(__ret);
+                }
+            }
+        
+        private:
+            
+            ::std::function<void (const ::std::string&)> _response;
+        };
+        return begin_getCompo(nom, __ctx, new Cpp11CB(__response, __exception, __sent));
+    }
+    
+public:
+#endif
+
+    ::Ice::AsyncResultPtr begin_getCompo(const ::std::string& nom)
+    {
+        return begin_getCompo(nom, 0, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getCompo(const ::std::string& nom, const ::Ice::Context& __ctx)
+    {
+        return begin_getCompo(nom, &__ctx, ::IceInternal::__dummyCallback, 0);
+    }
+
+    ::Ice::AsyncResultPtr begin_getCompo(const ::std::string& nom, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getCompo(nom, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getCompo(const ::std::string& nom, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getCompo(nom, &__ctx, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getCompo(const ::std::string& nom, const ::Serveur::Callback_mp3_getCompoPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getCompo(nom, 0, __del, __cookie);
+    }
+
+    ::Ice::AsyncResultPtr begin_getCompo(const ::std::string& nom, const ::Ice::Context& __ctx, const ::Serveur::Callback_mp3_getCompoPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    {
+        return begin_getCompo(nom, &__ctx, __del, __cookie);
+    }
+
+    ::std::string end_getCompo(const ::Ice::AsyncResultPtr&);
+    
+private:
+
+    ::std::string getCompo(const ::std::string&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_getCompo(const ::std::string&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    
+public:
+
     void play()
     {
         play(0);
@@ -1030,6 +1378,12 @@ public:
 
     virtual ::std::string getToken(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 
+    virtual ::std::string getArtiste(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+
+    virtual ::std::string getAlbum(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+
+    virtual ::std::string getCompo(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
+
     virtual void play(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
 
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&) = 0;
@@ -1062,6 +1416,12 @@ public:
 
     virtual ::std::string getToken(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
+    virtual ::std::string getArtiste(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual ::std::string getAlbum(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual ::std::string getCompo(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
     virtual void play(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual void stop(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
@@ -1093,6 +1453,12 @@ public:
     virtual ::std::string jouerMP3(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual ::std::string getToken(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual ::std::string getArtiste(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual ::std::string getAlbum(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
+
+    virtual ::std::string getCompo(const ::std::string&, const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
     virtual void play(const ::Ice::Context*, ::IceInternal::InvocationObserver&);
 
@@ -1133,6 +1499,15 @@ public:
 
     virtual ::std::string getToken(const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___getToken(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual ::std::string getArtiste(const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___getArtiste(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual ::std::string getAlbum(const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___getAlbum(::IceInternal::Incoming&, const ::Ice::Current&);
+
+    virtual ::std::string getCompo(const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___getCompo(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual void play(const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___play(::IceInternal::Incoming&, const ::Ice::Current&);
@@ -1570,6 +1945,306 @@ template<class T, typename CT> Callback_mp3_getTokenPtr
 newCallback_mp3_getToken(T* instance, void (T::*cb)(const ::std::string&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
     return new Callback_mp3_getToken<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_mp3_getArtiste : public Callback_mp3_getArtiste_Base, public ::IceInternal::TwowayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)(const ::std::string&);
+
+    CallbackNC_mp3_getArtiste(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+        ::std::string __ret;
+        try
+        {
+            __ret = __proxy->end_getArtiste(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::CallbackNC<T>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::CallbackNC<T>::callback.get()->*response)(__ret);
+        }
+    }
+
+    Response response;
+};
+
+template<class T> Callback_mp3_getArtistePtr
+newCallback_mp3_getArtiste(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::std::string&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_getArtiste<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_mp3_getArtistePtr
+newCallback_mp3_getArtiste(T* instance, void (T::*cb)(const ::std::string&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_getArtiste<T>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_mp3_getArtiste : public Callback_mp3_getArtiste_Base, public ::IceInternal::TwowayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const ::std::string&, const CT&);
+
+    Callback_mp3_getArtiste(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+        ::std::string __ret;
+        try
+        {
+            __ret = __proxy->end_getArtiste(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::Callback<T, CT>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::Callback<T, CT>::callback.get()->*response)(__ret, CT::dynamicCast(__result->getCookie()));
+        }
+    }
+
+    Response response;
+};
+
+template<class T, typename CT> Callback_mp3_getArtistePtr
+newCallback_mp3_getArtiste(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::std::string&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_getArtiste<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_mp3_getArtistePtr
+newCallback_mp3_getArtiste(T* instance, void (T::*cb)(const ::std::string&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_getArtiste<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_mp3_getAlbum : public Callback_mp3_getAlbum_Base, public ::IceInternal::TwowayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)(const ::std::string&);
+
+    CallbackNC_mp3_getAlbum(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+        ::std::string __ret;
+        try
+        {
+            __ret = __proxy->end_getAlbum(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::CallbackNC<T>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::CallbackNC<T>::callback.get()->*response)(__ret);
+        }
+    }
+
+    Response response;
+};
+
+template<class T> Callback_mp3_getAlbumPtr
+newCallback_mp3_getAlbum(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::std::string&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_getAlbum<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_mp3_getAlbumPtr
+newCallback_mp3_getAlbum(T* instance, void (T::*cb)(const ::std::string&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_getAlbum<T>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_mp3_getAlbum : public Callback_mp3_getAlbum_Base, public ::IceInternal::TwowayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const ::std::string&, const CT&);
+
+    Callback_mp3_getAlbum(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+        ::std::string __ret;
+        try
+        {
+            __ret = __proxy->end_getAlbum(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::Callback<T, CT>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::Callback<T, CT>::callback.get()->*response)(__ret, CT::dynamicCast(__result->getCookie()));
+        }
+    }
+
+    Response response;
+};
+
+template<class T, typename CT> Callback_mp3_getAlbumPtr
+newCallback_mp3_getAlbum(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::std::string&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_getAlbum<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_mp3_getAlbumPtr
+newCallback_mp3_getAlbum(T* instance, void (T::*cb)(const ::std::string&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_getAlbum<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T>
+class CallbackNC_mp3_getCompo : public Callback_mp3_getCompo_Base, public ::IceInternal::TwowayCallbackNC<T>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception&);
+    typedef void (T::*Sent)(bool);
+    typedef void (T::*Response)(const ::std::string&);
+
+    CallbackNC_mp3_getCompo(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+        ::std::string __ret;
+        try
+        {
+            __ret = __proxy->end_getCompo(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::CallbackNC<T>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::CallbackNC<T>::callback.get()->*response)(__ret);
+        }
+    }
+
+    Response response;
+};
+
+template<class T> Callback_mp3_getCompoPtr
+newCallback_mp3_getCompo(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::std::string&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_getCompo<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_mp3_getCompoPtr
+newCallback_mp3_getCompo(T* instance, void (T::*cb)(const ::std::string&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_mp3_getCompo<T>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT>
+class Callback_mp3_getCompo : public Callback_mp3_getCompo_Base, public ::IceInternal::TwowayCallback<T, CT>
+{
+public:
+
+    typedef IceUtil::Handle<T> TPtr;
+
+    typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
+    typedef void (T::*Sent)(bool , const CT&);
+    typedef void (T::*Response)(const ::std::string&, const CT&);
+
+    Callback_mp3_getCompo(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), response(cb)
+    {
+    }
+
+    virtual void __completed(const ::Ice::AsyncResultPtr& __result) const
+    {
+        ::Serveur::mp3Prx __proxy = ::Serveur::mp3Prx::uncheckedCast(__result->getProxy());
+        ::std::string __ret;
+        try
+        {
+            __ret = __proxy->end_getCompo(__result);
+        }
+        catch(::Ice::Exception& ex)
+        {
+            ::IceInternal::Callback<T, CT>::__exception(__result, ex);
+            return;
+        }
+        if(response)
+        {
+            (::IceInternal::Callback<T, CT>::callback.get()->*response)(__ret, CT::dynamicCast(__result->getCookie()));
+        }
+    }
+
+    Response response;
+};
+
+template<class T, typename CT> Callback_mp3_getCompoPtr
+newCallback_mp3_getCompo(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::std::string&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_getCompo<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_mp3_getCompoPtr
+newCallback_mp3_getCompo(T* instance, void (T::*cb)(const ::std::string&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_mp3_getCompo<T, CT>(instance, cb, excb, sentcb);
 }
 
 template<class T>
