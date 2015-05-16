@@ -1,0 +1,5 @@
+Glacier2.CryptPasswords=pwd
+Glacier2.Trace.RoutingTable=3
+Glacier2.Trace.Session=3
+Glacier2.Client.Endpoints=tcp -p 5036
+Glacier2.Server.Endpoints=tcp
