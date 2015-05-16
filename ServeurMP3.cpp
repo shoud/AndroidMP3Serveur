@@ -7,10 +7,10 @@
 /**
 * Constructeur de la classe ServeurMP3
 */
-ServeurMP3::ServeurMP3()
+ServeurMP3::ServeurMP3(Serveur::MoniteurPrx moniteur)
 {
 	nbMP3 = 0;
-
+	this->moniteur = moniteur;
 	//Permet de faire du streaming
 	vlc = libvlc_new(0, NULL);
 	//Connexion à la base de données
@@ -31,6 +31,7 @@ void ServeurMP3::ajouterMP3(string chemin,string titre, string artiste, string a
 	{
 	        listMP3.push_back(FichierMP3( chemin, titre, artiste, album, compo));
 		gestionBD->ajouter(chemin, titre, artiste, album, compo);
+		moniteur->rapport("ajouter",titre);
 	}
 }
 /**
@@ -44,6 +45,7 @@ bool ServeurMP3::supprimerMP3(string titre)
             {
                 listMP3.erase(itListMP3);
                 gestionBD->supprimer(itListMP3->getChemin());
+		moniteur->rapport("supprimer",titre);
 		return true;
             }
     return false;

@@ -20,9 +20,10 @@ class ServeurMP3
 	libvlc_instance_t *vlc;
 	string token;
 	GestionBD * gestionBD;
+	Serveur::MoniteurPrx moniteur;
 
     public:
-        ServeurMP3();
+        ServeurMP3(Serveur::MoniteurPrx moniteur);
 	void ajouterMP3(string chemin,string titre, string artiste, string album, string compo);
         bool supprimerMP3(string nom);
         bool rechercherMP3(string nom);
