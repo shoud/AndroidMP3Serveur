@@ -32,6 +32,17 @@ public:
     virtual void envoyerMusique(const std::string& titre, const std::string& artiste, const std::string& album, const std::string& compo, const Serveur::MusiqueByte& musique, const Ice::Current&);
 };
 
+class ServeurMoniteurI : public Serveur::Moniteur {
+
+        public:
+                virtual void rapport(const string& action, const string& titre, const Ice::Current&);
+};
+
+void ServeurMoniteurI::rapport(const string& action, const string& titre, const Ice::Current&)
+{
+        ;
+}
+
 void ServeurMP3I::envoyerMusique(const std::string& titre, const std::string& artiste, const std::string& album, const std::string& compo, const Serveur::MusiqueByte& musique, const Ice::Current&)
 {
     sm.envoyerMusique(titre,artiste,album,compo,musique);
@@ -105,7 +116,7 @@ int main(int argc, char* argv[])
 	}
 	std::cout << "Topic active!\n";
 	Ice::ObjectPrx pub = topic->getPublisher()->ice_twoway();
-	MoniteurPrx moniteur;
+	ServeurMoniteurI moniteur;
 	moniteur = MoniteurPrx::uncheckedCast(pub);
 	std::cout << "Moniteur activé\n";
 
