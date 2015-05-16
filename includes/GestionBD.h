@@ -1,4 +1,7 @@
-#include<sqlite3.h>
+#ifndef __GESTIONBD_H__
+#define __GESTIONBD_H__
+
+#include <sqlite3.h>
 #include <iostream>
 #include <list>
 #include "FichierMP3.h"
@@ -25,3 +28,4 @@ class GestionBD
 	list<FichierMP3> selectAll();
 	void select(string chemin);
 };
+#endif
