@@ -6,7 +6,7 @@ linked = -LC:/SQLite-lib/ -lsqlite3
 
 
 mon_serveur: main.o ServeurMP3.o FichierMP3.o ICEserveurMP3.o GestionBD.o
-	$(CC) $(COPTS) main.o ServeurMP3.o FichierMP3.o ICEserveurMP3.o GestionBD.o -o mon_serveur -lIce -lIceUtil -lpthread -Llib -lvlc -lsqlite3 
+	$(CC) $(COPTS) main.o ServeurMP3.o FichierMP3.o ICEserveurMP3.o GestionBD.o -o mon_serveur -lIce -lIceUtil -lpthread -Llib -lvlc -lsqlite3 -lIceStorm 
 
 ICEserveurMP3.o: ICEserveurMP3.cpp ICEserveurMP3.h
 	$(CC) $(COPTS) -c ICEserveurMP3.cpp 

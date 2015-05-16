@@ -9,6 +9,7 @@
 */
 
 #include <Ice/Ice.h>
+#include <IceStorm/IceStorm.h>
 #include "ICEserveurMP3.h"
 #include "ServeurMP3.h"
 
@@ -83,7 +84,34 @@ int main(int argc, char* argv[])
    try
    {
         ic = Ice::initialize(argc, argv);
-        Ice::ObjectAdapterPtr adapter = ic->createObjectAdapterWithEndpoints("SimpleServeurMP3Adapter", "default -p 10000");
+        //Service de messagerie
+	Ice::ObjectPrx obj = ic->stringToProxy("IceStorm/TopicManager:tcp -h shoud.ovh -p 5038");
+	IceStorm::TopicManagerPrx topicManager = IceStorm::TopicManagerPrx::checkedCast(obj);
+	IceStorm::TopicPrx topic;
+	while (!topic)
+	{
+		try
+		{
+			topic = topicManager->retrieve("StreamPlayerNotifs");
+			std::cout << "Retrieving topic...\n";
+		} catch (const IceStorm::NoSuchTopic&) {
+			std::cout << "No topic!\n";
+			try {
+				topic = topicManager->create("StreamPlayerNotifs");
+				std::cout << "Creating topic...\n";
+			} catch(const IceStorm::TopicExists&) {
+			}
+		}
+	}
+	std::cout << "Topic active!\n";
+	Ice::ObjectPrx pub = topic->getPublisher()->ice_twoway();
+	//MonitorPrx monitor;
+	//monitor = MonitorPrx::uncheckedCast(pub);
+	std::cout << "Monitor active!\n";
+
+
+	//Serveur MP3
+	Ice::ObjectAdapterPtr adapter = ic->createObjectAdapterWithEndpoints("SimpleServeurMP3Adapter", "default -p 10000");
         Ice::ObjectPtr object = new ServeurMP3I;
         adapter->add(object, ic->stringToIdentity("SimpleServeurMP3"));
         adapter->activate();
