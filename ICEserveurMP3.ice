@@ -16,4 +16,7 @@ module Serveur{
 		void envoyerMusique(string titre, string artiste, string album, string compo, MusiqueByte musique); 
 		listMP3 listerMP3();
 	};
+	interface Moniteur{
+		void rapport(string action, string titre);
+	};
 };

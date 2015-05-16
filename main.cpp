@@ -105,9 +105,9 @@ int main(int argc, char* argv[])
 	}
 	std::cout << "Topic active!\n";
 	Ice::ObjectPrx pub = topic->getPublisher()->ice_twoway();
-	//MonitorPrx monitor;
-	//monitor = MonitorPrx::uncheckedCast(pub);
-	std::cout << "Monitor active!\n";
+	MoniteurPrx moniteur;
+	moniteur = MoniteurPrx::uncheckedCast(pub);
+	std::cout << "Moniteur activé\n";
 
 
 	//Serveur MP3

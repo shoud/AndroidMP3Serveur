@@ -62,6 +62,8 @@ const ::std::string __Serveur__mp3__envoyerMusique_name = "envoyerMusique";
 
 const ::std::string __Serveur__mp3__listerMP3_name = "listerMP3";
 
+const ::std::string __Serveur__Moniteur__rapport_name = "rapport";
+
 }
 ::IceProxy::Ice::Object* ::IceProxy::Serveur::upCast(::IceProxy::Serveur::mp3* p) { return p; }
 
@@ -869,6 +871,99 @@ IceProxy::Serveur::mp3::__newInstance() const
 {
     return new mp3;
 }
+::IceProxy::Ice::Object* ::IceProxy::Serveur::upCast(::IceProxy::Serveur::Moniteur* p) { return p; }
+
+void
+::IceProxy::Serveur::__read(::IceInternal::BasicStream* __is, ::IceInternal::ProxyHandle< ::IceProxy::Serveur::Moniteur>& v)
+{
+    ::Ice::ObjectPrx proxy;
+    __is->read(proxy);
+    if(!proxy)
+    {
+        v = 0;
+    }
+    else
+    {
+        v = new ::IceProxy::Serveur::Moniteur;
+        v->__copyFrom(proxy);
+    }
+}
+
+void
+IceProxy::Serveur::Moniteur::rapport(const ::std::string& action, const ::std::string& titre, const ::Ice::Context* __ctx)
+{
+    ::IceInternal::InvocationObserver __observer(this, __Serveur__Moniteur__rapport_name, __ctx);
+    int __cnt = 0;
+    while(true)
+    {
+        ::IceInternal::Handle< ::IceDelegate::Ice::Object> __delBase;
+        try
+        {
+            __delBase = __getDelegate(false);
+            ::IceDelegate::Serveur::Moniteur* __del = dynamic_cast< ::IceDelegate::Serveur::Moniteur*>(__delBase.get());
+            __del->rapport(action, titre, __ctx, __observer);
+            return;
+        }
+        catch(const ::IceInternal::LocalExceptionWrapper& __ex)
+        {
+            __handleExceptionWrapper(__delBase, __ex, __observer);
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            __handleException(__delBase, __ex, true, __cnt, __observer);
+        }
+    }
+}
+
+::Ice::AsyncResultPtr
+IceProxy::Serveur::Moniteur::begin_rapport(const ::std::string& action, const ::std::string& titre, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+{
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Serveur__Moniteur__rapport_name, __del, __cookie);
+    try
+    {
+        __result->__prepare(__Serveur__Moniteur__rapport_name, ::Ice::Normal, __ctx);
+        ::IceInternal::BasicStream* __os = __result->__startWriteParams(::Ice::DefaultFormat);
+        __os->write(action);
+        __os->write(titre);
+        __result->__endWriteParams();
+        __result->__send(true);
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __result->__exceptionAsync(__ex);
+    }
+    return __result;
+}
+
+void
+IceProxy::Serveur::Moniteur::end_rapport(const ::Ice::AsyncResultPtr& __result)
+{
+    __end(__result, __Serveur__Moniteur__rapport_name);
+}
+
+const ::std::string&
+IceProxy::Serveur::Moniteur::ice_staticId()
+{
+    return ::Serveur::Moniteur::ice_staticId();
+}
+
+::IceInternal::Handle< ::IceDelegateM::Ice::Object>
+IceProxy::Serveur::Moniteur::__createDelegateM()
+{
+    return ::IceInternal::Handle< ::IceDelegateM::Ice::Object>(new ::IceDelegateM::Serveur::Moniteur);
+}
+
+::IceInternal::Handle< ::IceDelegateD::Ice::Object>
+IceProxy::Serveur::Moniteur::__createDelegateD()
+{
+    return ::IceInternal::Handle< ::IceDelegateD::Ice::Object>(new ::IceDelegateD::Serveur::Moniteur);
+}
+
+::IceProxy::Ice::Object*
+IceProxy::Serveur::Moniteur::__newInstance() const
+{
+    return new Moniteur;
+}
 
 bool
 IceDelegateM::Serveur::mp3::supprimerMP3(const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
@@ -1283,6 +1378,47 @@ IceDelegateM::Serveur::mp3::listerMP3(const ::Ice::Context* __context, ::IceInte
     catch(const ::Ice::LocalException& __ex)
     {
         throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+    }
+}
+
+void
+IceDelegateM::Serveur::Moniteur::rapport(const ::std::string& action, const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver& __observer)
+{
+    ::IceInternal::Outgoing __og(__handler.get(), __Serveur__Moniteur__rapport_name, ::Ice::Normal, __context, __observer);
+    try
+    {
+        ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
+        __os->write(action);
+        __os->write(titre);
+        __og.endWriteParams();
+    }
+    catch(const ::Ice::LocalException& __ex)
+    {
+        __og.abort(__ex);
+    }
+    bool __ok = __og.invoke();
+    if(__og.hasResponse())
+    {
+        try
+        {
+            if(!__ok)
+            {
+                try
+                {
+                    __og.throwUserException();
+                }
+                catch(const ::Ice::UserException& __ex)
+                {
+                    ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
+                    throw __uue;
+                }
+            }
+            __og.readEmptyParams();
+        }
+        catch(const ::Ice::LocalException& __ex)
+        {
+            throw ::IceInternal::LocalExceptionWrapper(__ex, false);
+        }
     }
 }
 
@@ -2022,6 +2158,72 @@ IceDelegateD::Serveur::mp3::listerMP3(const ::Ice::Context* __context, ::IceInte
     return __result;
 }
 
+void
+IceDelegateD::Serveur::Moniteur::rapport(const ::std::string& action, const ::std::string& titre, const ::Ice::Context* __context, ::IceInternal::InvocationObserver&)
+{
+    class _DirectI : public ::IceInternal::Direct
+    {
+    public:
+
+        _DirectI(const ::std::string& __p_action, const ::std::string& __p_titre, const ::Ice::Current& __current) : 
+            ::IceInternal::Direct(__current),
+            _m_action(__p_action),
+            _m_titre(__p_titre)
+        {
+        }
+        
+        virtual ::Ice::DispatchStatus
+        run(::Ice::Object* object)
+        {
+            ::Serveur::Moniteur* servant = dynamic_cast< ::Serveur::Moniteur*>(object);
+            if(!servant)
+            {
+                throw ::Ice::OperationNotExistException(__FILE__, __LINE__, _current.id, _current.facet, _current.operation);
+            }
+            servant->rapport(_m_action, _m_titre, _current);
+            return ::Ice::DispatchOK;
+        }
+        
+    private:
+        
+        const ::std::string& _m_action;
+        const ::std::string& _m_titre;
+    };
+    
+    ::Ice::Current __current;
+    __initCurrent(__current, __Serveur__Moniteur__rapport_name, ::Ice::Normal, __context);
+    try
+    {
+        _DirectI __direct(action, titre, __current);
+        try
+        {
+            __direct.getServant()->__collocDispatch(__direct);
+        }
+        catch(...)
+        {
+            __direct.destroy();
+            throw;
+        }
+        __direct.destroy();
+    }
+    catch(const ::Ice::SystemException&)
+    {
+        throw;
+    }
+    catch(const ::IceInternal::LocalExceptionWrapper&)
+    {
+        throw;
+    }
+    catch(const ::std::exception& __ex)
+    {
+        ::IceInternal::LocalExceptionWrapper::throwWrapper(__ex);
+    }
+    catch(...)
+    {
+        throw ::IceInternal::LocalExceptionWrapper(::Ice::UnknownException(__FILE__, __LINE__, "unknown c++ exception"), false);
+    }
+}
+
 ::Ice::Object* Serveur::upCast(::Serveur::mp3* p) { return p; }
 
 namespace
@@ -2334,5 +2536,130 @@ Serveur::__patch(mp3Ptr& handle, const ::Ice::ObjectPtr& v)
     if(v && !handle)
     {
         IceInternal::Ex::throwUOE(::Serveur::mp3::ice_staticId(), v);
+    }
+}
+
+::Ice::Object* Serveur::upCast(::Serveur::Moniteur* p) { return p; }
+
+namespace
+{
+const ::std::string __Serveur__Moniteur_ids[2] =
+{
+    "::Ice::Object",
+    "::Serveur::Moniteur"
+};
+
+}
+
+bool
+Serveur::Moniteur::ice_isA(const ::std::string& _s, const ::Ice::Current&) const
+{
+    return ::std::binary_search(__Serveur__Moniteur_ids, __Serveur__Moniteur_ids + 2, _s);
+}
+
+::std::vector< ::std::string>
+Serveur::Moniteur::ice_ids(const ::Ice::Current&) const
+{
+    return ::std::vector< ::std::string>(&__Serveur__Moniteur_ids[0], &__Serveur__Moniteur_ids[2]);
+}
+
+const ::std::string&
+Serveur::Moniteur::ice_id(const ::Ice::Current&) const
+{
+    return __Serveur__Moniteur_ids[1];
+}
+
+const ::std::string&
+Serveur::Moniteur::ice_staticId()
+{
+    return __Serveur__Moniteur_ids[1];
+}
+
+::Ice::DispatchStatus
+Serveur::Moniteur::___rapport(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+{
+    __checkMode(::Ice::Normal, __current.mode);
+    ::IceInternal::BasicStream* __is = __inS.startReadParams();
+    ::std::string action;
+    ::std::string titre;
+    __is->read(action);
+    __is->read(titre);
+    __inS.endReadParams();
+    rapport(action, titre, __current);
+    __inS.__writeEmptyParams();
+    return ::Ice::DispatchOK;
+}
+
+namespace
+{
+const ::std::string __Serveur__Moniteur_all[] =
+{
+    "ice_id",
+    "ice_ids",
+    "ice_isA",
+    "ice_ping",
+    "rapport"
+};
+
+}
+
+::Ice::DispatchStatus
+Serveur::Moniteur::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& current)
+{
+    ::std::pair< const ::std::string*, const ::std::string*> r = ::std::equal_range(__Serveur__Moniteur_all, __Serveur__Moniteur_all + 5, current.operation);
+    if(r.first == r.second)
+    {
+        throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
+    }
+
+    switch(r.first - __Serveur__Moniteur_all)
+    {
+        case 0:
+        {
+            return ___ice_id(in, current);
+        }
+        case 1:
+        {
+            return ___ice_ids(in, current);
+        }
+        case 2:
+        {
+            return ___ice_isA(in, current);
+        }
+        case 3:
+        {
+            return ___ice_ping(in, current);
+        }
+        case 4:
+        {
+            return ___rapport(in, current);
+        }
+    }
+
+    assert(false);
+    throw ::Ice::OperationNotExistException(__FILE__, __LINE__, current.id, current.facet, current.operation);
+}
+
+void
+Serveur::Moniteur::__writeImpl(::IceInternal::BasicStream* __os) const
+{
+    __os->startWriteSlice(ice_staticId(), -1, true);
+    __os->endWriteSlice();
+}
+
+void
+Serveur::Moniteur::__readImpl(::IceInternal::BasicStream* __is)
+{
+    __is->startReadSlice();
+    __is->endReadSlice();
+}
+
+void 
+Serveur::__patch(MoniteurPtr& handle, const ::Ice::ObjectPtr& v)
+{
+    handle = ::Serveur::MoniteurPtr::dynamicCast(v);
+    if(v && !handle)
+    {
+        IceInternal::Ex::throwUOE(::Serveur::Moniteur::ice_staticId(), v);
     }
 }
