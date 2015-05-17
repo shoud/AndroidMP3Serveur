@@ -50,14 +50,14 @@ bool ServeurMP3::supprimerMP3(string titre)
  	//On parcour la liste de mp3 pour trouver le titre à supprimer
 	for(itListMP3 = listMP3.begin(); itListMP3 != listMP3.end(); itListMP3++)
         	//Si le titre est présent
-		if(itListMP3->getTitre() == titre)
+		if(itListMP3->getTitre().compare(titre) == 0)
             	{
 			//Suppression du MP3 sur le disque
 			remove(itListMP3->getChemin().c_str());
+			//On supprimer le mp3 de la base de donnée
+                        gestionBD->supprimer(itListMP3->getChemin());
 			//On enleve le mp3 de la liste dynamique	
                 	listMP3.erase(itListMP3);
-			//On supprimer le mp3 de la base de donnée
-                	gestionBD->supprimer(itListMP3->getChemin());
 			//On envoi un message pour dire qu'un titre a été supprimé
 			moniteur->rapport("supprimer",titre);
 			//On retourne comme quoi le fichier a bien été supprimé
