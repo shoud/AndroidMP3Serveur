@@ -15,6 +15,9 @@
 
 using namespace std;
 
+/**
+* Classe pour ICE permettant d'executer les bonnes fonctions
+*/
 class ServeurMP3I : public Serveur::mp3 {
 private :
 	ServeurMP3 * sm;
@@ -92,32 +95,40 @@ int main(int argc, char* argv[])
         ic = Ice::initialize(argc, argv);
         //Service de messagerie
 	Ice::ObjectPrx obj = ic->stringToProxy("IceStorm/TopicManager:tcp -h shoud.ovh -p 5038");
+	//Création du topique manageur
 	IceStorm::TopicManagerPrx topicManager = IceStorm::TopicManagerPrx::checkedCast(obj);
+	//Création du topique
 	IceStorm::TopicPrx topic;
 	while (!topic)
 	{
 		try
 		{
-			topic = topicManager->retrieve("StreamPlayerNotifs");
-			std::cout << "Retrieving topic...\n";
-		} catch (const IceStorm::NoSuchTopic&) {
-			std::cout << "No topic!\n";
-			try {
-				topic = topicManager->create("StreamPlayerNotifs");
-				std::cout << "Creating topic...\n";
-			} catch(const IceStorm::TopicExists&) {
+			//Permet de dire qu'elle topique on utilise
+			topic = topicManager->retrieve("NotificationAjouterSupprimer");
+		//Si le topique n'existe pas
+		} catch (const IceStorm::NoSuchTopic&)
+		{
+			
+			try
+			{
+				//Création du topique
+				topic = topicManager->create("NotificationAjouterSupprimer");
+			//Si impossible de créer le topique
+			} catch(const IceStorm::TopicExists&)
+			{
+				// Pas définit
 			}
 		}
 	}
-	std::cout << "Topic active!\n";
-	Ice::ObjectPrx pub = topic->getPublisher()->ice_twoway();
+	//Récupération du publisher
+	Ice::ObjectPrx objectPrx = topic->getPublisher()->ice_twoway();
+	//Instanciation d'un moniteur
 	Serveur::MoniteurPrx moniteur;
-	moniteur = Serveur::MoniteurPrx::uncheckedCast(pub);
-	std::cout << "Moniteur activé\n";
-
-
-	//Serveur MP3
+	//Création du moniteur
+	moniteur = Serveur::MoniteurPrx::uncheckedCast(objectPrx);
+	//Création du serveur pour gérer les mp3
 	Ice::ObjectAdapterPtr adapter = ic->createObjectAdapterWithEndpoints("SimpleServeurMP3Adapter", "default -p 10000");
+	//Création de l'objet permettant de gérer les mp3, on lui donne le moniteur pour qu'il puisse envoyer des messages
         Ice::ObjectPtr object = new ServeurMP3I(moniteur);
         adapter->add(object, ic->stringToIdentity("SimpleServeurMP3"));
         adapter->activate();

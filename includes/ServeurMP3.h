@@ -11,15 +11,26 @@
 
 using namespace std;
 
+/**
+* Classe permettant de gérer des fichiers mp3
+* et de faire du streaming
+*/
 class ServeurMP3
 {
     private :
-        int nbMP3;
+        // Le nombre de fichier mp3
+	int nbMP3;
+	//La liste des fichier mp3
         list<FichierMP3> listMP3;
+	//L'itérator de la liste des fichier mp3
         list<FichierMP3>::iterator itListMP3;
+	//L'objet vlc permettant de faire du streaming
 	libvlc_instance_t *vlc;
+	//Le token pour avoir des conexion uniques
 	string token;
+	//L'objet permettant de faire des requets sur la base de données
 	GestionBD * gestionBD;
+	//Pour envoyer un message avec Storm
 	Serveur::MoniteurPrx moniteur;
 
     public:

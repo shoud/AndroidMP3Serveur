@@ -12,9 +12,9 @@ class FichierMP3
     private :
         string titre; //Le titre de la musique
 	string chemin; //Le chemin où est enregistré la musique
-	string album;
-	string compo;
-	string artiste;
+	string album; //l'album de la musique
+	string compo; //Le compositeur de la musique
+	string artiste; //l'artiste de la musique
 
     public:
         FichierMP3(string chemin, string titre, string artiste, string album, string compo);
